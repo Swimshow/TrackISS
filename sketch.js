@@ -1,8 +1,14 @@
 var lt ;
 var lg ;
+var urlISS = "http://api.open-notify.org/iss-now.json";
+
+function reload(){
+	loadJSON(urlISS,ISSLocated);
+
+}
 
 function preload(){
-	var urlISS = "http://api.open-notify.org/iss-now.json";
+	
 	loadJSON(urlISS,ISSLocated);
 
 }
@@ -10,16 +16,19 @@ function preload(){
 function ISSLocated(ISSLoc){
 	lt=floor(ISSLoc.iss_position.latitude);
 	lg=floor(ISSLoc.iss_position.longitude);
+	initMap();
 	
 }
 function mousePressed(){
-	preload();
-	setup(); 
+
 }
 
 function setup() {
+
+	var buttonRefresh = select('#refresh');
+
+	buttonRefresh.mousePressed(reload);
 	
-	initMap();
   
 }
 
